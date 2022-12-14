@@ -2,21 +2,21 @@
 
 const tabsTitle = document.querySelectorAll(".tabs-title");
 const tabsContent = document.querySelectorAll(".tab");
-let activeTab;
+
+function removeClass(list, className){
+  list.forEach((item) => item.classList.remove(className));
+}
 
 function selectTabTitle() {
-  tabsTitle.forEach((item) => item.classList.remove("active"));
+  removeClass(tabsTitle, "active");
   this.classList.add("active");
-  activeTab = this.dataset.tabName;
-  selectTabContent(activeTab);
+  selectTabContent(this.dataset.tabName);
 }
 
 function selectTabContent(activeTab) {
-  tabsContent.forEach((item) =>
-    item.classList.contains(activeTab)
-      ? item.classList.add("active")
-      : item.classList.remove("active")
-  );
+  removeClass(tabsContent, "active")
+  const activeContent = document.querySelector(`.${activeTab}`);
+  activeContent.classList.add("active");
 }
 
 tabsTitle.forEach((item) => {
